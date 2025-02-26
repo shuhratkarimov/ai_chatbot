@@ -15,7 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const node_telegram_bot_api_1 = __importDefault(require("node-telegram-bot-api"));
 const axios_1 = __importDefault(require("axios"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const express_1 = __importDefault(require("express"));
+const app = (0, express_1.default)();
 dotenv_1.default.config();
+const PORT = process.env.PORT || 3000;
 const bot = new node_telegram_bot_api_1.default(process.env.BOT_TOKEN, { polling: true });
 bot.on('message', (msg) => __awaiter(void 0, void 0, void 0, function* () {
     const chatId = msg.chat.id;
@@ -43,3 +46,9 @@ bot.on('message', (msg) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 console.log('AI Chatbot ishlayapti...');
+app.get("/", (req, res) => {
+    res.send("Bot is running!");
+});
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

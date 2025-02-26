@@ -1,8 +1,10 @@
 import TelegramBot from 'node-telegram-bot-api';
 import axios from 'axios';
 import dotenv from 'dotenv';
-
+import express, { Request, Response } from "express";
+const app = express();
 dotenv.config();
+const PORT = process.env.PORT || 3000;
 
 const bot = new TelegramBot(process.env.BOT_TOKEN as string, { polling: true });
 
@@ -39,3 +41,11 @@ bot.on('message', async (msg) => {
 });
 
 console.log('AI Chatbot ishlayapti...');
+
+app.get("/", (req: Request, res: Response) => {
+    res.send("Bot is running!");
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
