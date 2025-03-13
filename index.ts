@@ -45,6 +45,10 @@ console.log('AI Chatbot ishlayapti...');
 app.get("/", (req: Request, res: Response) => {
     res.send("Bot is running!");
   });
+
+  setInterval(() => {
+    fetch("https://ai-chatbot-6dqz.onrender.com").catch(() => {});
+  }, 5 * 60 * 1000); // 5 daqiqada bir ping
   
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
