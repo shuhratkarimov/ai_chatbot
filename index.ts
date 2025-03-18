@@ -13,7 +13,7 @@ bot.on('message', async (msg) => {
     const text = msg.text || '';
 
     if (text.startsWith('/start')) {
-        bot.sendMessage(chatId, 'Assalomu alaykum! Men Mistral AI chatbotman. Savollaringizga javob beraman.');
+        bot.sendMessage(chatId, 'Hello! I am an AI and can answer any of your questions!.');
         return;
     }
 
@@ -35,16 +35,21 @@ bot.on('message', async (msg) => {
         const reply = response.data.choices[0].message.content;
         bot.sendMessage(chatId, reply);
     } catch (error) {
-        console.error('API xatosi:', error);
-        bot.sendMessage(chatId, 'Kechirasiz, javob olishda xatolik yuz berdi.');
+        console.error('API error:', error);
+        bot.sendMessage(chatId, 'Sorry, error occured while getting answer...');
     }
 });
 
-console.log('AI Chatbot ishlayapti...');
+console.log('AI Chatbot is working...');
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Bot is running!");
   });
+
+  setInterval(() => {
+    fetch("https://ai-chatbot-6dqz.onrender.com").catch(err => console.log("Ping error:", err));
+  }, 10 * 60 * 1000);
+  
 
   setInterval(() => {
     fetch("https://ai-chatbot-6dqz.onrender.com").catch(() => {});
